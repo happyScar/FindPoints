@@ -4,10 +4,12 @@ import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GeodeticCurve;
 import org.gavaghan.geodesy.GlobalCoordinates;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import com.example.findPoints.info.PointInfo;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +66,7 @@ public class CoordinateUtil {
     }
 
     /**
-     * 判断目标点是否在区域范围内
+     * 判断目标点是否在区域范围内（目标点为单个点）
      *
      * @param r               区域半径
      * @param centerLatitude  中心点纬度
@@ -77,6 +79,25 @@ public class CoordinateUtil {
                                         double targetLatitude, double targetLongitude) {
         double distance = getDistance(centerLatitude, centerLongitude, targetLatitude, targetLongitude);
         return distance < r;
+    }
+
+    /**
+     * 判断目标点是否在区域范围内（目标点为多个点）
+     *
+     * @param r               区域半径
+     * @param centerLatitude  中心点纬度
+     * @param centerLongitude 中心点经度
+     * @param list 目标点集（元素类型为PointInfo）
+     * @return 将不在区域范围内的点从 map中删去，返回在区域范围内的点的map集合
+     */
+    public static  Map<Long, Double> isWithinRange(double r, double centerLatitude, double centerLongitude,List<PointInfo> list) {
+        Map<Long,Double> distanceMap = getDistance(centerLatitude, centerLongitude, list);
+        distanceMap.forEach((key, value) -> {
+            if (value >= r ){
+                distanceMap.remove(key);
+            }
+        });
+        return distanceMap;
     }
 
 
