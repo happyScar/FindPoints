@@ -1,4 +1,4 @@
-package com.example.findpoints.info;
+package com.example.findPoints.info;
 
 import lombok.*;
 

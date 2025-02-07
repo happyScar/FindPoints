@@ -1,6 +1,5 @@
-package com.example.findpoints;
+package com.example.findPoints;
 
-import com.example.findpoints.info.PointInfo;
 import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GeodeticCurve;
