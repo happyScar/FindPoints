@@ -13,7 +13,7 @@ import lombok.*;
 @NoArgsConstructor
 public class PointInfo {
 
-    private Long id;
+    private Integer id;
     private double xPoint;
     private double yPoint;
 }
