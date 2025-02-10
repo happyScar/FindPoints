@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.example.findPoints.info.PointInfo;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,8 +49,8 @@ public class CoordinateUtil {
      * @param list 目标点集（元素类型为PointInfo）
      * @return 返回两点之间距离，使用 map<id,distance> 存储
      */
-    public static Map<Long, Double> getDistance(double centerLatitude, double centerLongitude, List<PointInfo> list) {
-        Map<Long, Double> map = new HashMap<>();
+    public static Map<Integer, Double> getDistance(double centerLatitude, double centerLongitude, List<PointInfo> list) {
+        Map<Integer, Double> map = new HashMap<>();
         GlobalCoordinates centreGlobalCoordinates = new GlobalCoordinates(centerLatitude, centerLongitude);
         for (PointInfo point :
                 list) {
@@ -88,13 +89,17 @@ public class CoordinateUtil {
      * @param list 目标点集（元素类型为PointInfo）
      * @return 将不在区域范围内的点从 map中删去，返回在区域范围内的点的map集合
      */
-    public static  Map<Long, Double> isWithinRange(double r, double centerLatitude, double centerLongitude,List<PointInfo> list) {
-        Map<Long,Double> distanceMap = getDistance(centerLatitude, centerLongitude, list);
-        distanceMap.forEach((key, value) -> {
-            if (value >= r ){
-                distanceMap.remove(key);
+    public static Map<Integer, Double> isWithinRange(double r, double centerLatitude, double centerLongitude,List<PointInfo> list) {
+        Map<Integer,Double> distanceMap = getDistance(centerLatitude, centerLongitude, list);
+        Iterator <Map.Entry<Integer,Double>> iterator = distanceMap.entrySet().iterator();
+        while ((iterator.hasNext())){
+            Map.Entry<Integer,Double> entry = iterator.next();
+            if (entry.getValue() >=r){
+                iterator.remove();
+            }else {
+                System.out.println();
             }
-        });
+        }
         return distanceMap;
     }
 
