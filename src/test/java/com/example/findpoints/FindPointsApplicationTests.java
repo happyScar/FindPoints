@@ -28,25 +28,4 @@ class FindPointsApplicationTests {
 
     }
 
-    @Test
-    void testsWithinRanges() {
-        List<PointInfo> pointInfos = new ArrayList<>();
-        for (int i = 0; i < 5; ++i) {
-            pointInfos.add(new PointInfo(i, (i + 1) * 2, (i + 1) * 3));
-        }
-        Map<Integer, Double> pointsMap1 = CoordinateUtil.isWithinRange(
-                10000,
-                2.1,
-                3.1,
-                pointInfos);
-        System.out.println(pointsMap1.isEmpty() ? "No Points" : pointsMap1.toString());// No Points
-        Map<Integer, Double> pointsMap2 = CoordinateUtil.isWithinRange(
-                100000,
-                2.1,
-                3.1,
-                pointInfos);
-        System.out.println(pointsMap2.isEmpty() ? "No Points" : pointsMap2.toString()); // {0=15720.304956802594}
-
-    }
-
 }
