@@ -11,7 +11,6 @@ import java.util.Map;
 
 @SpringBootTest
 class FindPointsApplicationTests {
-    double r = 100000;
 
     @Test
     void testIsWithinRange() {
