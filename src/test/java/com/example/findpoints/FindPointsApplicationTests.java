@@ -14,7 +14,7 @@ class FindPointsApplicationTests {
     double r = 100000;
 
     @Test
-    void testsWithinRange() {
+    void testIsWithinRange() {
         System.out.println(CoordinateUtil.isWithinRange(
                 10000,
                 22,
@@ -25,6 +25,30 @@ class FindPointsApplicationTests {
                 22,
                 113.72,
                 22, 113.71));// true
+
+    }
+
+    @Test
+    void testIsWithinRanges() {
+        List<PointInfo> list = new ArrayList<>();
+        for (int i = 0; i < 5; ++i) {
+            list.add(new PointInfo(
+                    i,
+                    (i + 1) * 2,
+                    (i + 1) * 3));
+        }
+        Map<Integer, Double> map1 = CoordinateUtil.isWithinRange(
+                10000,
+                2.1,
+                3,
+                list);
+        System.out.println(map1.isEmpty() ? "No Points" : map1.toString());// No Points
+        Map<Integer, Double> map2 = CoordinateUtil.isWithinRange(
+                10000,
+                2.1,
+                3,
+                list);
+        System.out.println(map2.isEmpty() ? "No Points" : map2.toString());// {0=11119.492664455212}
 
     }
 
